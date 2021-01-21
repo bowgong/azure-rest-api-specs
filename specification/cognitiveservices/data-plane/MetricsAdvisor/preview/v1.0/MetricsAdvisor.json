@@ -318,7 +318,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "getAlertsByAnomalyAlertingConfigurationNext"
         }
       }
     },
@@ -1008,7 +1009,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "getAnomaliesByAnomalyDetectionConfigurationNext"
         }
       }
     },
@@ -1080,7 +1082,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "getDimensionOfAnomaliesByAnomalyDetectionConfigurationNext"
         }
       }
     },
@@ -2035,7 +2038,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "listMetricFeedbacksNext"
         }
       }
     },
@@ -2397,7 +2401,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "getDataFeedIngestionStatusNext"
         }
       }
     },
@@ -2641,7 +2646,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "getMetricSeriesNext"
         }
       }
     },
@@ -2715,7 +2721,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "getMetricDimensionNext"
         }
       }
     },
@@ -2950,7 +2957,418 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "operationName": "getEnrichmentStatusByMetricNext"
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{nextLink}?getAlertsByAnomalyAlertingConfigurationNext": {
+      "post": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query alerts under anomaly alerting configuration",
+        "operationId": "getAlertsByAnomalyAlertingConfigurationNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query alerting result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertingResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AlertResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{nextLink}?getAnomaliesByAnomalyDetectionConfigurationNext": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query anomalies under anomaly detection configuration",
+        "operationId": "getAnomaliesByAnomalyDetectionConfigurationNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query detection anomaly result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionAnomalyResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{nextLink}?getDimensionOfAnomaliesByAnomalyDetectionConfigurationNext": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query dimension values of anomalies",
+        "operationId": "getDimensionOfAnomaliesByAnomalyDetectionConfigurationNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query dimension values request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDimensionQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDimensionList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{nextLink}?listMetricFeedbacksNext": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "List feedback on the given metric",
+        "operationId": "listMetricFeedbacksNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "metric feedback filter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricFeedbackFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricFeedbackList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{nextLink}?getDataFeedIngestionStatusNext": {
+      "post": {
+        "tags": [
+          "IngestionStatus"
+        ],
+        "summary": "Get data ingestion status by data feed",
+        "operationId": "getDataFeedIngestionStatusNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The query time range",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IngestionStatusQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionStatusList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{nextLink}?getMetricSeriesNext": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "List series (dimension combinations) from metric",
+        "operationId": "getMetricSeriesNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "filter to query series",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricSeriesQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricSeriesList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{nextLink}?getMetricDimensionNext": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "List dimension from certain metric",
+        "operationId": "getMetricDimensionNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query dimension option",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricDimensionQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricDimensionList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{nextLink}?getEnrichmentStatusByMetricNext": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "Query anomaly detection status",
+        "operationId": "getEnrichmentStatusByMetricNext",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nextLink",
+            "description": "the next link",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query options",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnrichmentStatusQueryOption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrichmentStatusList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
