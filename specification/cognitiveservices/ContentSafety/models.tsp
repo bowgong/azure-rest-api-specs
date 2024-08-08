@@ -101,7 +101,7 @@ model TextBlocklistMatch {
   blocklistItemId: string;
 
   @doc("The content of the matched item.")
-  @maxLength(128)
+  @maxLength(1000)
   blocklistItemText: string;
 }
 
@@ -215,11 +215,9 @@ model RemoveTextBlocklistItemsOptions {
 @doc("The request of analyzing potential direct or indirect injection attacks.")
 model ShieldPromptOptions {
   @doc("The user prompt to be analyzed, which may contain direct injection attacks.")
-  @maxLength(10000)
   userPrompt?: string;
 
   @doc("The documents to be analyzed, which may contain direct or indirect injection attacks.")
-  @maxItems(5)
   documents?: string[];
 }
 
@@ -251,7 +249,6 @@ model DocumentInjectionAnalysisResult {
 @doc("The request of detecting potential protected material present in the given text.")
 model DetectTextProtectedMaterialOptions {
   @doc("The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
-  @maxLength(10000)
   text: string;
 }
 
@@ -269,6 +266,39 @@ model TextProtectedMaterialAnalysisResult {
   detected: boolean;
 }
 
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request of detecting potential protected material present in the given code.")
+model DetectCodeProtectedMaterialOptions {
+  @doc("The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
+  @maxLength(10000)
+  code: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The combined detection results of potential protected material for code.")
+model DetectCodeProtectedMaterialResult {
+  @doc("Analysis result for the given text.")
+  protectedMaterialAnalysis: CodeProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The code citation of potential protected material for code.")
+model CodeCitation {
+  @doc("The license for detected code. If the value is NOASSERTION, it means the code hasn't assertted in the repo.")
+  license: string;
+  @doc("The URLs of the source code.")
+  sourceUrls: string[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The individual detection result of potential protected material for code.")
+model CodeProtectedMaterialAnalysisResult {
+  @doc("Whether potential protected material is detected or not.")
+  detected: boolean;
+
+  @doc("The code citation of potential protected material for code.")
+  codeCitations: CodeCitation[];
+}
 
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
@@ -295,6 +325,7 @@ union GroundednessTask {
   QnA: "QnA",
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The options for QnA task.")
 model QnAOptions {
@@ -303,6 +334,7 @@ model QnAOptions {
   query: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The LLM resource type supported in Text Groundedness analysis.")
 union LLMResourceType {
@@ -312,6 +344,7 @@ union LLMResourceType {
   AzureOpenAI: "AzureOpenAI",
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("Details of the given LLM resource.")
 model LLMResource {
@@ -328,7 +361,7 @@ model LLMResource {
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
-@doc("The request of test groundedness analysis.")
+@doc("The request of text groundedness analysis.")
 model AnalyzeTextGroundednessOptions {
   @doc("""
   The domain of the text for analysis. Allowed values: Medical, Generic.
@@ -407,12 +440,6 @@ model UngroundednessDetails {
   It's available only when the 'reasoning' field in the input is set to true.
   """)
   reason?: string;
-
-  @doc("""
-  The mitigation for detected ungroundedness.
-  It's available only when the 'mitigating' field in the input is set to true.
-  """)
-  mitigatedText?: string;
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
@@ -430,6 +457,12 @@ model AnalyzeTextGroundednessResult {
 
   @doc("Provides insights into ungrounded content with specific examples and percentages.")
   ungroundedDetails: UngroundednessDetails[];
+
+  @doc("""
+  The mitigation for detected ungroundedness.
+  It's available only when the 'mitigating' field in the input is set to true.
+  """)
+  mitigatedText?: string;
 }
 
 
@@ -491,9 +524,17 @@ model AutoReviewerLabelDetails {
 @doc("The possible status of an Auto Reviewer operation.")
 union AutoReviewerOperationStatus {
   string,
+  
+  @doc("Auto Reviewer operation status - NotStarted")
   "NotStarted",
+  
+  @doc("Auto Reviewer operation status - Running")
   "Running",
+  
+  @doc("Auto Reviewer operation status - Succeeded")
   "Succeeded",
+  
+  @doc("Auto Reviewer operation status - Failed")
   "Failed",
 }
 
@@ -550,10 +591,20 @@ model AutoReviewerOperationDetail {
 @doc("The possible status of a content safety incident operation.")
 union IncidentOperationStatus {
   string,
+
+  @doc("Content Safety Incident operation status - NotStarted")
   "NotStarted",
+
+  @doc("Content Safety Incident operation status - Running")
   "Running",
+
+  @doc("Content Safety Incident operation status - Succeeded")
   "Succeeded",
+
+  @doc("Content Safety Incident operation status - Failed")
   "Failed",
+
+  @doc("Content Safety Incident operation status - Canceled")
   "Canceled",
 }
 
