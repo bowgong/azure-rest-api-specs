@@ -1240,12 +1240,6 @@ model RaiPolicy {
 
   @doc("The task settings.")
   taskSettings: TaskSetting[];
-
-  @doc("The base settings.")
-  baseSettings?: HarmConfig[];
-
-  @doc("The advanced settings.")
-  advancedSettings?: AdvancedSetting[];
 }
 
 @doc("Defines the options for analyzing content with a rai policy.")
