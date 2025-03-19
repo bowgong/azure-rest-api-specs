@@ -965,11 +965,14 @@ union Modality {
 union SourceType {
   string,
 
-  @doc("The source type for message - message to AI.")
-  "messageToAI",
+  @doc("All source types.")
+  "all",
 
-  @doc("The source type for message - message from AI.")
-  "messageFromAI",
+  @doc("The source type for message - prompt.")
+  "prompt",
+
+  @doc("The source type for message - completion.")
+  "completion",
 }
 
 @doc("The type of the role.")
@@ -979,17 +982,20 @@ union RoleType {
   @doc("All roles.")
   "all",
 
-  @doc("User role.")
-  "user",
+  @doc("Assistant role.")
+  "assistant",
+
+  @doc("Function role.")
+  "function",
 
   @doc("System role.")
   "system",
 
-  @doc("Assistant role.")
-  "assistant",
-
   @doc("Tool role.")
   "tool",
+
+  @doc("User role.")
+  "user",
 }
 
 @doc("The harm category.")
@@ -1138,13 +1144,13 @@ model BlockingCriteria {
   kind: BlockingCriteriaKind;
 
   @doc("The allowed severity level.")
-  allowedSeverity: int32;
+  allowedSeverity?: int32;
 
   @doc("Indicates if it is detected.")
-  isDetected: boolean;
+  isDetected?: boolean;
 
   @doc("The risk level.")
-  allowedRiskLevel: RiskLevel;
+  allowedRiskLevel?: RiskLevel;
 }
 
 @doc("Task setting model.")
