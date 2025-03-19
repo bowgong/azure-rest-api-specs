@@ -1184,6 +1184,9 @@ model BlockingCriteria {
 
   @doc("The risk level.")
   allowedRiskLevel?: RiskLevel;
+
+  @doc("The allowed score.")
+  allowedScore?: float32;
 }
 
 @doc("Task setting model.")
