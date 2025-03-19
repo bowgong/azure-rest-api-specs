@@ -1079,9 +1079,6 @@ model UnifyContent {
 
   @doc("The base64 encoded image content.")
   imageBase64?: string;
-
-  @doc("The blob URL of the image content.")
-  imageBlob?: string;
 }
 
 @doc("Unify message model.")
