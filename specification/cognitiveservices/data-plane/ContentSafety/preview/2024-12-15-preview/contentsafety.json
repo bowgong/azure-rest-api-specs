@@ -3205,14 +3205,16 @@
         "allowedRiskLevel": {
           "$ref": "#/definitions/RiskLevel",
           "description": "The risk level."
+        },
+        "allowedScore": {
+          "type": "number",
+          "format": "float",
+          "description": "The allowed score."
         }
       },
       "required": [
         "enabled",
-        "kind",
-        "allowedSeverity",
-        "isDetected",
-        "allowedRiskLevel"
+        "kind"
       ]
     },
     "BlockingCriteriaKind": {
@@ -3221,7 +3223,8 @@
       "enum": [
         "severity",
         "riskLevel",
-        "isDetected"
+        "isDetected",
+        "score"
       ],
       "x-ms-enum": {
         "name": "BlockingCriteriaKind",
@@ -3241,6 +3244,11 @@
             "name": "isDetected",
             "value": "isDetected",
             "description": "The is detected type."
+          },
+          {
+            "name": "score",
+            "value": "score",
+            "description": "The score type."
           }
         ]
       }
@@ -3566,58 +3574,124 @@
       "type": "string",
       "description": "The harm category.",
       "enum": [
-        "celebrity",
-        "drug",
-        "hate",
-        "promptInjection",
-        "protectedMaterial",
-        "sexual",
-        "selfHarm",
-        "violence"
+        "Unspecified",
+        "Celebrity",
+        "CodeVulnerability",
+        "Drug",
+        "Hate",
+        "PromptInjection",
+        "ProtectedMaterialCode",
+        "ProtectedMaterialText",
+        "Sexual",
+        "SelfHarm",
+        "Violence",
+        "Xpia",
+        "FateInappropriate",
+        "FateSuicideHelp",
+        "FateOffensive",
+        "Txt2CodeLowAUC",
+        "BingJailbreak",
+        "FatePolitics",
+        "FateElectionCriticalInformation"
       ],
       "x-ms-enum": {
         "name": "HarmCategory",
         "modelAsString": true,
         "values": [
           {
-            "name": "celebrity",
-            "value": "celebrity",
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Unspecified harm category."
+          },
+          {
+            "name": "Celebrity",
+            "value": "Celebrity",
             "description": "Celebrity harm category."
           },
           {
-            "name": "drug",
-            "value": "drug",
+            "name": "CodeVulnerability",
+            "value": "CodeVulnerability",
+            "description": "Code vulnerability harm category."
+          },
+          {
+            "name": "Drug",
+            "value": "Drug",
             "description": "Drug harm category."
           },
           {
-            "name": "hate",
-            "value": "hate",
+            "name": "Hate",
+            "value": "Hate",
             "description": "Hate harm category."
           },
           {
-            "name": "promptInjection",
-            "value": "promptInjection",
+            "name": "PromptInjection",
+            "value": "PromptInjection",
             "description": "Prompt injection harm category."
           },
           {
-            "name": "protectedMaterial",
-            "value": "protectedMaterial",
-            "description": "Protected material harm category."
+            "name": "ProtectedMaterialCode",
+            "value": "ProtectedMaterialCode",
+            "description": "Protected material code harm category."
           },
           {
-            "name": "sexual",
-            "value": "sexual",
+            "name": "ProtectedMaterialText",
+            "value": "ProtectedMaterialText",
+            "description": "Protected material text harm category."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
             "description": "Sexual harm category."
           },
           {
-            "name": "selfHarm",
-            "value": "selfHarm",
+            "name": "SelfHarm",
+            "value": "SelfHarm",
             "description": "Self-harm category."
           },
           {
-            "name": "violence",
-            "value": "violence",
+            "name": "Violence",
+            "value": "Violence",
             "description": "Violence harm category."
+          },
+          {
+            "name": "Xpia",
+            "value": "Xpia",
+            "description": "Xpia harm category."
+          },
+          {
+            "name": "FateInappropriate",
+            "value": "FateInappropriate",
+            "description": "Fate inappropriate harm category."
+          },
+          {
+            "name": "FateSuicideHelp",
+            "value": "FateSuicideHelp",
+            "description": "Fate suicide help harm category."
+          },
+          {
+            "name": "FateOffensive",
+            "value": "FateOffensive",
+            "description": "Fate offensive harm category."
+          },
+          {
+            "name": "Txt2CodeLowAUC",
+            "value": "Txt2CodeLowAUC",
+            "description": "Txt2Code low AUC harm category."
+          },
+          {
+            "name": "BingJailbreak",
+            "value": "BingJailbreak",
+            "description": "Bing jailbreak harm category."
+          },
+          {
+            "name": "FatePolitics",
+            "value": "FatePolitics",
+            "description": "Fate politics harm category."
+          },
+          {
+            "name": "FateElectionCriticalInformation",
+            "value": "FateElectionCriticalInformation",
+            "description": "Fate election critical information harm category."
           }
         ]
       }
@@ -4531,10 +4605,11 @@
       "description": "The type of the role.",
       "enum": [
         "all",
-        "user",
-        "system",
         "assistant",
-        "tool"
+        "function",
+        "system",
+        "tool",
+        "user"
       ],
       "x-ms-enum": {
         "name": "RoleType",
@@ -4546,9 +4621,14 @@
             "description": "All roles."
           },
           {
-            "name": "user",
-            "value": "user",
-            "description": "User role."
+            "name": "assistant",
+            "value": "assistant",
+            "description": "Assistant role."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "Function role."
           },
           {
             "name": "system",
@@ -4556,14 +4636,14 @@
             "description": "System role."
           },
           {
-            "name": "assistant",
-            "value": "assistant",
-            "description": "Assistant role."
-          },
-          {
             "name": "tool",
             "value": "tool",
             "description": "Tool role."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "User role."
           }
         ]
       }
@@ -4638,22 +4718,40 @@
       "type": "string",
       "description": "The source type of the message.",
       "enum": [
-        "messageToAI",
-        "messageFromAI"
+        "all",
+        "prompt",
+        "completion",
+        "system",
+        "document"
       ],
       "x-ms-enum": {
         "name": "SourceType",
         "modelAsString": true,
         "values": [
           {
-            "name": "messageToAI",
-            "value": "messageToAI",
-            "description": "The source type for message - message to AI."
+            "name": "all",
+            "value": "all",
+            "description": "All source types."
           },
           {
-            "name": "messageFromAI",
-            "value": "messageFromAI",
-            "description": "The source type for message - message from AI."
+            "name": "prompt",
+            "value": "prompt",
+            "description": "The source type for message - prompt."
+          },
+          {
+            "name": "completion",
+            "value": "completion",
+            "description": "The source type for message - completion."
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The source type for message - system."
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "The source type for message - document."
           }
         ]
       }
@@ -5220,10 +5318,6 @@
         "imageBase64": {
           "type": "string",
           "description": "The base64 encoded image content."
-        },
-        "imageBlob": {
-          "type": "string",
-          "description": "The blob URL of the image content."
         }
       },
       "required": [
