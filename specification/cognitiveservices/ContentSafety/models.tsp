@@ -973,6 +973,12 @@ union SourceType {
 
   @doc("The source type for message - completion.")
   "completion",
+
+  @doc("The source type for message - system.")
+  "system",
+
+  @doc("The source type for message - document.")
+  "document",
 }
 
 @doc("The type of the role.")
@@ -1106,6 +1112,9 @@ union BlockingCriteriaKind {
 
   @doc("The is detected type.")
   "isDetected",
+
+  @doc("The score type.")
+  "score",
 }
 
 @doc("Unify content model.")
@@ -1231,6 +1240,12 @@ model RaiPolicy {
 
   @doc("The task settings.")
   taskSettings: TaskSetting[];
+
+  @doc("The base settings.")
+  baseSettings?: HarmConfig[];
+
+  @doc("The advanced settings.")
+  advancedSettings?: AdvancedSetting[];
 }
 
 @doc("Defines the options for analyzing content with a rai policy.")
