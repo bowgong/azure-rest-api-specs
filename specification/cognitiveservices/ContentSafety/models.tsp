@@ -1002,29 +1002,62 @@ union RoleType {
 union HarmCategory {
   string,
 
+  @doc("Unspecified harm category.")
+  "Unspecified",
+
   @doc("Celebrity harm category.")
-  "celebrity",
+  "Celebrity",
+
+  @doc("Code vulnerability harm category.")
+  "CodeVulnerability",
 
   @doc("Drug harm category.")
-  "drug",
+  "Drug",
 
   @doc("Hate harm category.")
-  "hate",
+  "Hate",
 
   @doc("Prompt injection harm category.")
-  "promptInjection",
+  "PromptInjection",
 
-  @doc("Protected material harm category.")
-  "protectedMaterial",
+  @doc("Protected material code harm category.")
+  "ProtectedMaterialCode",
+
+  @doc("Protected material text harm category.")
+  "ProtectedMaterialText",
 
   @doc("Sexual harm category.")
-  "sexual",
+  "Sexual",
 
   @doc("Self-harm category.")
-  "selfHarm",
+  "SelfHarm",
 
   @doc("Violence harm category.")
-  "violence",
+  "Violence",
+
+  @doc("Xpia harm category.")
+  "Xpia",
+
+  @doc("Fate inappropriate harm category.")
+  "FateInappropriate",
+
+  @doc("Fate suicide help harm category.")
+  "FateSuicideHelp",
+
+  @doc("Fate offensive harm category.")
+  "FateOffensive",
+
+  @doc("Txt2Code low AUC harm category.")
+  "Txt2CodeLowAUC",
+
+  @doc("Bing jailbreak harm category.")
+  "BingJailbreak",
+
+  @doc("Fate politics harm category.")
+  "FatePolitics",
+
+  @doc("Fate election critical information harm category.")
+  "FateElectionCriticalInformation",
 }
 
 @doc("The risk level.")
