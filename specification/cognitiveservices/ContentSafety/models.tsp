@@ -965,11 +965,20 @@ union Modality {
 union SourceType {
   string,
 
-  @doc("The source type for message - message to AI.")
-  "messageToAI",
+  @doc("All source types.")
+  "all",
 
-  @doc("The source type for message - message from AI.")
-  "messageFromAI",
+  @doc("The source type for message - prompt.")
+  "prompt",
+
+  @doc("The source type for message - completion.")
+  "completion",
+
+  @doc("The source type for message - system.")
+  "system",
+
+  @doc("The source type for message - document.")
+  "document",
 }
 
 @doc("The type of the role.")
@@ -979,46 +988,82 @@ union RoleType {
   @doc("All roles.")
   "all",
 
-  @doc("User role.")
-  "user",
+  @doc("Assistant role.")
+  "assistant",
+
+  @doc("Function role.")
+  "function",
 
   @doc("System role.")
   "system",
 
-  @doc("Assistant role.")
-  "assistant",
-
   @doc("Tool role.")
   "tool",
+
+  @doc("User role.")
+  "user",
 }
 
 @doc("The harm category.")
 union HarmCategory {
   string,
 
+  @doc("Unspecified harm category.")
+  "Unspecified",
+
   @doc("Celebrity harm category.")
-  "celebrity",
+  "Celebrity",
+
+  @doc("Code vulnerability harm category.")
+  "CodeVulnerability",
 
   @doc("Drug harm category.")
-  "drug",
+  "Drug",
 
   @doc("Hate harm category.")
-  "hate",
+  "Hate",
 
   @doc("Prompt injection harm category.")
-  "promptInjection",
+  "PromptInjection",
 
-  @doc("Protected material harm category.")
-  "protectedMaterial",
+  @doc("Protected material code harm category.")
+  "ProtectedMaterialCode",
+
+  @doc("Protected material text harm category.")
+  "ProtectedMaterialText",
 
   @doc("Sexual harm category.")
-  "sexual",
+  "Sexual",
 
   @doc("Self-harm category.")
-  "selfHarm",
+  "SelfHarm",
 
   @doc("Violence harm category.")
-  "violence",
+  "Violence",
+
+  @doc("Xpia harm category.")
+  "Xpia",
+
+  @doc("Fate inappropriate harm category.")
+  "FateInappropriate",
+
+  @doc("Fate suicide help harm category.")
+  "FateSuicideHelp",
+
+  @doc("Fate offensive harm category.")
+  "FateOffensive",
+
+  @doc("Txt2Code low AUC harm category.")
+  "Txt2CodeLowAUC",
+
+  @doc("Bing jailbreak harm category.")
+  "BingJailbreak",
+
+  @doc("Fate politics harm category.")
+  "FatePolitics",
+
+  @doc("Fate election critical information harm category.")
+  "FateElectionCriticalInformation",
 }
 
 @doc("The risk level.")
@@ -1067,6 +1112,9 @@ union BlockingCriteriaKind {
 
   @doc("The is detected type.")
   "isDetected",
+
+  @doc("The score type.")
+  "score",
 }
 
 @doc("Unify content model.")
@@ -1079,9 +1127,6 @@ model UnifyContent {
 
   @doc("The base64 encoded image content.")
   imageBase64?: string;
-
-  @doc("The blob URL of the image content.")
-  imageBlob?: string;
 }
 
 @doc("Unify message model.")
@@ -1141,13 +1186,16 @@ model BlockingCriteria {
   kind: BlockingCriteriaKind;
 
   @doc("The allowed severity level.")
-  allowedSeverity: int32;
+  allowedSeverity?: int32;
 
   @doc("Indicates if it is detected.")
-  isDetected: boolean;
+  isDetected?: boolean;
 
   @doc("The risk level.")
-  allowedRiskLevel: RiskLevel;
+  allowedRiskLevel?: RiskLevel;
+
+  @doc("The allowed score.")
+  allowedScore?: float32;
 }
 
 @doc("Task setting model.")
