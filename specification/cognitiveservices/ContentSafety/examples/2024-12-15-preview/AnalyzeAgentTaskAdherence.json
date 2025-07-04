@@ -60,8 +60,7 @@
   "responses": {
     "200": {
       "body": {
-        "taskRiskDetected" : false,
-        "details" : "...details about the adherence to the task"
+        "taskRiskDetected" : false
       }
     }
   }
