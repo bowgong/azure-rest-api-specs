@@ -508,3 +508,22 @@ interface RaiPolicyManagement {
   @doc("Get all rai policies details.")
   listRaiPolicies is RaiPolicyOps.ResourceList<RaiPolicy>;
 }
+
+interface AgentOperations {
+  @added(Versions.v2024_12_15_Preview)
+  @summary("Analyze AgentTaskAdherence")
+  @doc("A synchronous API for analyzing agent task adherence in a conversation. It supports detecting harmful agentic behavior such as deviation from task and inappropriate tool calls.")
+  @route("/agent:analyzeTaskAdherence")
+  @post
+  analyzeAgentTaskAdherence is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The request body for analyzing agent task adherence.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTaskAdherenceRequest;
+    },
+    AnalyzeTaskAdherenceResult
+  >;
+}
