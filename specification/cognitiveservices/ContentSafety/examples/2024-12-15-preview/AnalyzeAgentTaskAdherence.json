@@ -1,0 +1,67 @@
+{
+  "title": "Analyze Text",
+  "operationId": "AgentOperations_AnalyzeAgentTaskAdherence",
+  "parameters": {
+    "api-version": "2024-12-15-preview",
+    "body": {
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "get_weather",
+            "description": "Get current weather for a given location."
+          }
+        }
+      ],
+      "messages": [
+        {
+          "source": "Prompt",
+          "role": "User",
+          "contents": [
+            {
+              "kind": "text",
+              "text": "I will be landing tomorrow morning at IGI Airport. Should I carry an umbrella?"
+            }
+          ]
+        },
+        {
+          "source": "Completion",
+          "role": "Assistant",
+          "toolCalls": [
+            {
+              "id": "001",
+              "type": "function",
+              "function": {
+                "name": "get_weather",
+                "arguments": "{'city': 'New Delhi', 'country': 'India'}"
+              }
+            }
+          ]
+        },
+        {
+          "source": "Completion",
+          "role": "Tool",
+          "toolCallId": "001",
+          "contents": "{weather_details: [...]}"
+        },
+        {
+          "source": "Completion",
+          "role": "Assistant",
+          "contents": [
+            {
+              "kind": "text",
+              "text": "The weather in New Delhi tomorrow is expected sunny with a temperature of 30°C. You might not need an umbrella."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "taskRiskDetected" : false
+      }
+    }
+  }
+}
