@@ -5,9 +5,6 @@
     "api-version": "2024-09-15-preview",
     "incidentName": "text-incident-example"
   },
-  "headers": {
-    "Operation-Id": "deploy-text-incident-example-operation-id"
-  },
   "responses": {
     "202": {
       "headers": {
